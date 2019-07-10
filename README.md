@@ -13,7 +13,7 @@ Download and installation instructions for [1],[2] and [3] can be found here:
 
 A preprint of the manuscript can be found on BioRxiv: XXX
 
-This code is archived on Zenodo: XXXX
+This code is archived on Zenodo: [![DOI](https://zenodo.org/badge/196264197.svg)](https://zenodo.org/badge/latestdoi/196264197)
 
 [1]: H. Haario, M. Laine, A. Mira and E. Saksman, 2006. DRAM: Efficient adaptive MCMC, Statistics and Computing 16, pp. 339-354. doi: 10.1007/s11222-006-9438-0.
 [2]: H. Haario, E. Saksman and J. Tamminen, 2001. An adaptive Metropolis algorithm Bernoulli 7, pp. 223-242. doi: 10.2307/3318737
