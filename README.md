@@ -11,7 +11,7 @@ Download and installation instructions for [1],[2] and [3] can be found here:
 - MCMC toolbox by Marko Laine (MATLAB): https://mjlaine.github.io/mcmcstat/
 - vfill function: https://www.mathworks.com/matlabcentral/fileexchange/43090-hfill-and-vfill
 
-A preprint of the manuscript can be found on BioRxiv: XXX
+A preprint of the manuscript can be found on BioRxiv: https://www.biorxiv.org/content/10.1101/696435v1
 
 This code is archived on Zenodo: [![DOI](https://zenodo.org/badge/196264197.svg)](https://zenodo.org/badge/latestdoi/196264197)
 
