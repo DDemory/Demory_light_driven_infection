@@ -10,7 +10,8 @@ clear all; close all; clc;
 
 % figure
 figure('DefaultAxesFontSize',20,'DefaultAxesFontName','Times')
-set(gcf,'units','centimeters','position',[0 0 100 24])
+set(gcf,'units','centimeters','position',[0 0 40 10])
+%set(gcf,'units','centimeters','position',[0 0 100 24])
 set(gcf,'color','w')
 set(groot,{'DefaultAxesXColor','DefaultAxesYColor','DefaultAxesZColor'},{'k','k','k'})
 
@@ -77,7 +78,7 @@ for s = 1:8
         % P-SSP7 -- initial model -- H2_{\beta} -- host dynamics
     elseif s == 6
         k = 1;
-        load('out_Strain_1_H2_delayLysis_0.mat')
+        load('out_Strain_1_H1_delayLysis_0.mat')
         np = size(out.predlims{1}{1},1);
         nn = (np+1)/2; % median
         np = nn-1;
@@ -99,7 +100,7 @@ for s = 1:8
         % P-SSP7 -- initial model -- H2_{\beta} -- virus dynamics
     elseif s == 8
         k = 2;
-        load('out_Strain_1_H2_delayLysis_0.mat')
+        load('out_Strain_1_H1_delayLysis_0.mat')
         np = size(out.predlims{1}{1},1);
         %np = 5;
         nn = (np+1)/2; % median
@@ -192,20 +193,20 @@ for s = 1:8
 end
 
 % legend
-h1 =  legend(hAx(1),[ff(2),ff(1)],'model $H0$','model $H2_{\phi \beta}$','interpreter','latex','orientation','horizontal','location','southoutside');
-h2 =  legend(hAx(3),[ff(6),dd1,dd2],'model $H1_{\beta}$','replicate 1','replicate 2','interpreter','latex','orientation','horizontal','location','southoutside');
-h1.Box = 'off'; h2.Box = 'off';
-h1.Position = [0.1,0.01,0.1807,0.0485];
-h2.Position = [0.215,0.01,0.1807,0.0485];
+%h1 =  legend(hAx(1),[ff(2),ff(1)],'model $H0$','model $H2_{\phi \lambda}$','interpreter','latex','orientation','horizontal','location','southoutside');
+%h2 =  legend(hAx(3),[ff(6),dd1,dd2],'model $H1_{\phi}$','replicate 1','replicate 2','interpreter','latex','orientation','horizontal','location','southoutside');
+%h1.Box = 'off'; h2.Box = 'off';
+%h1.Position = [0.1,0.01,0.1807,0.0485];
+%h2.Position = [0.215,0.01,0.1807,0.0485];
 
 % axes labels
-p1=get(hAx(1),'position'); 
-p2=get(hAx(4),'position'); 
-hAxOuter=axes('position',[p1(1) p2(2) p2(1)+p2(3)-p1(1)  p1(2)+p1(4)-p2(2)], ...
-              'color','none','visible','off'); % an outer axis for the whole figure
+%p1=get(hAx(1),'position'); 
+%p2=get(hAx(4),'position'); 
+%hAxOuter=axes('position',[p1(1) p2(2) p2(1)+p2(3)-p1(1)  p1(2)+p1(4)-p2(2)], ...
+%              'color','none','visible','off'); % an outer axis for the whole figure
 %Xlabel    
-hY=text(0.5,-0.05,'Time (hours)','rotation',0,'fontsize',20, ... 
-        'horizontalalignment','center','verticalalignment','top');
+%hY=text(0.5,-0.05,'Time (hours)','rotation',0,'fontsize',20, ... 
+%        'horizontalalignment','center','verticalalignment','top');
     
 %% Export
 

@@ -10,26 +10,27 @@ clear all; close all;clc;
 
 % Load parameter chians
 % P-HM2 -- lysis inhibition model -- H1
-load('Constrained_MCMCres_H1_Strain_0_delayLysis_1_date_18-Apr-2019.mat')
+load('MCMCres_H1_Strain_0_delayLysis_1.mat')
 HM21 = resmcmc{1};
 
 % P-HM2 -- initial model -- H0
-load('Constrained_MCMCres_H0_Strain_0_delayLysis_0_date_18-Apr-2019.mat')
+load('MCMCres_H0_Strain_0_delayLysis_0.mat')
 HM20 = resmcmc{1};
 
 % P-SSP7 -- lysis inhibition model -- H0
-load('Constrained_MCMCres_H0_Strain_1_delayLysis_1_date_18-Apr-2019.mat')
+load('MCMCres_H0_Strain_1_delayLysis_1.mat')
 SSP70 = resmcmc{1};
 
 % P-SSP7 -- initial model -- H0
-load('Constrained_MCMCres_H0_Strain_1_delayLysis_0_date_18-Apr-2019.mat')
+load('MCMCres_H0_Strain_1_delayLysis_0.mat')
 SSP700 = resmcmc{1};
 
 % bin histograms
 bin = 50;
 
 % figure
-fig = figure('DefaultAxesFontSize',20,'position',[0 0 1200 1500]);
+%fig = figure('DefaultAxesFontSize',20,'position',[0 0 1200 1500]);
+fig = figure('DefaultAxesFontSize',20,'position',[0 0 600 700]);
 
 %% Plot P-HM2
 % Adsorption
@@ -38,7 +39,7 @@ hold on
 
 h0 = histogram(exp(HM20.chain(:,1)),bin,'normalization','probability','Linestyle','none','FaceAlpha', 0.4);
 h1L = histogram(exp(HM21.chain(:,1)),bin,'normalization','probability','Linestyle','none','FaceAlpha', 1);
-h1D = histogram(exp(HM21.chain(:,2)),20000,'normalization','probability','Linestyle','none','FaceAlpha', 0.8);
+h1D = histogram(exp(HM21.chain(:,2)),5000,'normalization','probability','Linestyle','none','FaceAlpha', 0.8);
 
 h0.FaceColor = [100 100 100]/255;
 h1L.FaceColor = [102 178 255]/255;
@@ -48,7 +49,7 @@ h0.EdgeColor = [100 100 100]/255;
 h1L.EdgeColor = [102 178 255]/255;
 h1D.EdgeColor = [8,29,88]/255;
 
-axis([10E-14 10E-7 0 0.1])
+axis([10E-14 10E-7 0 0.15])
 set(gca,'Xscale','log')
 set(gca,'Xlim',[1E-14,1E-7])
 set(gca,'xtick',[1E-14,1E-12,1E-10,1E-8])
@@ -58,9 +59,9 @@ ylabel('Probability')
 title('MED4 / P-HM2')
 
 
-h1 = legend('$H0$','$\widetilde{H1_{\phi}}$ light','$\widetilde{H1_{\phi}}$ dark','interpreter','latex');
-h1.Box = 'off';
-h1.Position = [0.16    0.875    0.0708    0.0190];
+%h1 = legend('$H0$','$\widetilde{H1_{\phi}}$ light','$\widetilde{H1_{\phi}}$ dark','interpreter','latex');
+%h1.Box = 'off';
+%h1.Position = [0.16    0.875    0.0708    0.0190];
 
 % Latent period
 hAx(3) = subplot(3,2,3);
@@ -75,13 +76,13 @@ h1L.FaceColor = [102 178 255]/255;
 h0.EdgeColor = [100 100 100]/255;
 h1L.EdgeColor = [102 178 255]/255;
 
-axis([0 16 0 0.1])
+axis([0 16 0 0.15])
 set(gca,'Xlim',[0,16])
 set(gca,'xtick',[0,4,8,12,16])
 
-h11 = legend(h1L,'$\widetilde{H1_{\phi}}$ Constant','interpreter','latex');
-h11.Box = 'off';
-h11.Position = [0.1765    0.835    0.0708    0.0190];
+%h11 = legend(h1L,'$\widetilde{H1_{\phi}}$ Constant','interpreter','latex');
+%h11.Box = 'off';
+%h11.Position = [0.1765    0.835    0.0708    0.0190];
 
 %xlabel('Latent period (hours)','Interpreter','Tex')
 ylabel('Probability')
@@ -99,7 +100,7 @@ h1L.FaceColor = [102 178 255]/255;
 h0.EdgeColor = [100 100 100]/255;
 h1L.EdgeColor = [102 178 255]/255;
 
-axis([0 120 0 0.1])
+axis([0 120 0 0.15])
 set(gca,'xtick',[0,20,40,60,80,100,120])
 
 %xlabel('Burst size','Interpreter','Tex')
@@ -122,14 +123,14 @@ h00.EdgeColor = [100 100 100]/255;
 h0.EdgeColor = [208,28,139]/255;
 
 set(gca,'Xscale','log')
-axis([10E-14 10E-7 0 0.1])
+axis([10E-14 10E-7 0 0.15])
 set(gca,'Xlim',[1E-14,1E-7])
 set(gca,'xtick',[1E-14,1E-12,1E-10,1E-8])
 title('MED4 / P-SSP7')
 
-h1 = legend('$H0$','$\widetilde{H0}$','interpreter','latex');
-h1.Box = 'off';
-h1.Position = [0.585    0.875    0.0708    0.0190];
+%h1 = legend('$H0$','$\widetilde{H0}$','interpreter','latex');
+%h1.Box = 'off';
+%h1.Position = [0.585    0.875    0.0708    0.0190];
 
 % Latent period
 hAx(4) = subplot(3,2,4);
@@ -144,7 +145,7 @@ h0.FaceColor = [208,28,139]/255;
 h00.EdgeColor = [100 100 100]/255;
 h0.EdgeColor = [208,28,139]/255;
 
-axis([3 16 0 0.1])
+axis([3 16 0 0.15])
 set(gca,'Xlim',[1,16])
 set(gca,'xtick',[0,4,8,12,16])
 
@@ -161,7 +162,7 @@ h0.FaceColor = [208,28,139]/255;
 h00.EdgeColor = [100 100 100]/255;
 h0.EdgeColor = [208,28,139]/255;
 
-axis([0 120 0 0.1])
+axis([0 120 0 0.15])
 set(gca,'xtick',[0,20,40,60,80,100,120])
 
 % axes labels
@@ -201,3 +202,4 @@ set(gcf,'Color','w')
 
 % export
 print -dpng -r300 figure6.png
+print -dpdf -r600 figure6.pdf
