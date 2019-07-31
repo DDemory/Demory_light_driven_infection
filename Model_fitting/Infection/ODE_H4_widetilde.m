@@ -1,5 +1,5 @@
 % David Demory -- April 2019
-function ydot = ODE_H4_widetilde(t,y,thetalog,para)
+function ydot = ODE_H4_widetilde(t,y,thetalog,para,gversion)
 % ode system function for SEIV model
 % H4 = \phi_L \phi_D \beta_L \beta_D \lambda
 % n para = 5;
@@ -23,25 +23,38 @@ theta = exp(thetalog);
 
 lambda = theta(3);
 
+if gversion == 0
 if rem(t,24) < 14 % t = 0 to 14h => light
     
     phi = theta(1);
     beta = theta(4);
-    
     delta = deltaL;
-    
-    %omega = omegaL;
     mu = muopt*(L*rem(t,24)).^4./((L*rem(t,24)).^4+kd^4);
     
 elseif rem(t,24) >= 14 % t = 14 to 24h => dark
     
     phi = theta(2);
     beta = theta(5);
-
     delta = deltaD;
-    
     mu = muopt*(L*14).^4./((L*14).^4+kd.^4);
 end
+elseif gversion == 1
+	tau = rem(t,24);
+	if tau < 14 % light
+	       phi = theta(1);
+	       beta = theta(4);
+	       delta = deltaL;
+		Lt=tau*L;
+		mu = muopt*(Lt^4)/(Lt^4+kd^4);
+	else
+	       phi = theta(2);
+	       beta = theta(5);
+	       delta = deltaD;
+		Lt=L*(14-(tau-14)*14/10);
+		mu = muopt*(Lt^4)/(Lt^4+kd^4);
+	end
+end
+
 
 
 %% model

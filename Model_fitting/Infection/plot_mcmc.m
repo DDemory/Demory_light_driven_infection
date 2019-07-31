@@ -1,16 +1,18 @@
 %% Plot chain
 figure
-for pp = 1:size(MAT,1)
+pp = 1;
+nbrBatches = 5;
+%for pp = 1:size(MAT,1)
     hold on
     mcmcplot(exp(resmcmc{pp}.chain),[],resmcmc{pp}.results,'pairs');
-end
+    %end
 drawnow 
 
 figure
 h = [1,3,5,7,9];
 v = [2,4,6,8,10];
 
-for pp = 1:size(MAT,1)
+%for pp = 1:size(MAT,1)
 	
 	for z = 1:nbrBatches
 		
@@ -40,4 +42,4 @@ for pp = 1:size(MAT,1)
 	xlabel('Hours')
 	ylabel('Virus/ml')
 end
-end
+	%end

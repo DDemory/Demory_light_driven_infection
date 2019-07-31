@@ -1,5 +1,5 @@
 % David Demory -- April 2019
-function ydot = ODE_H0_initial(t,y,thetalog,para)
+function ydot = ODE_H0_initial(t,y,thetalog,para,gversion)
 % ode system function for SEIV model
 % H0 = \phi \beta \lambda
 % n para = 3;
@@ -26,8 +26,7 @@ phi = theta(1);
 lambda  = theta(2);
 beta = theta(3);
 
-beta  = theta(3);
-
+if gversion == 0;
     if rem(t,24) < 14 % t = 0 to 14h => light
         delta = deltaL;
         mu = muopt*(L*rem(t,24)).^4./((L*rem(t,24)).^4+kd^4);
@@ -35,8 +34,27 @@ beta  = theta(3);
         delta = deltaD;
         mu = muopt*(L*14).^4./((L*14).^4+kd.^4);
     end
+elseif gversion == 1;
+	tau = rem(t,24);
+	if tau < 14 % light
+		delta = deltaL;
+		Lt=tau*L;
+		mu = muopt*(Lt^4)/(Lt^4+kd^4);
+	else
+		delta = deltaD;
+		Lt=L*(14-(tau-14)*14/10);
+		mu = muopt*(Lt^4)/(Lt^4+kd^4);
+	end
+end
 
-
+% if gversion == 0
+%     col = 'r';
+% elseif gversion == 1
+%     col = 'b'
+% end
+% hold on
+% plot(t,delta,'.','color',col)
+% drawnow
 
 
 %% model

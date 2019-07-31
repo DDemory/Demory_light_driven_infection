@@ -1,6 +1,6 @@
 % David Demory -- April 2019
-function [data,iniH,aveH,stdH,iniV,aveV,stdV,xl_array,xu_array] = setup_strain(s,Hypo,delayLysis,nbrBatches)
-	
+function [data,iniH,aveH,stdH,iniV,aveV,stdV,xl_array,xu_array] = setup_strain(s,Hypo,delayLysis,gversion,nbrBatches)
+
 %% Setup_strain function
 % return the associated dataset and the associeted parameter
 % setup.
@@ -43,7 +43,7 @@ elseif s == 1
     host = 0;
 end
 
-% number of parameters to estimate 
+% number of parameters to estimate
 if Hypo == 0
     npara = 3;
 elseif Hypo == 1 || Hypo == 2 || Hypo == 3
@@ -58,24 +58,38 @@ end
 % data, metadata and host data
 for i = 1:nbrBatches
     
-    % data and meta data	
+    % data and meta data
     data{i}.ydata = xlsread(file,i);
     data{i}.Hypo = Hypo;
     data{i}.strain = s;
     data{i}.host = host;
     data{i}.delayLysis = delayLysis;
+    data{i}.gversion = gversion;
     
-    % host growht data
-    L = 35;
-    data{i}.L = L;
-    data{i}.kd = 322.68;
-    data{i}.K = 3E9;
-    mumax = 0.056965;
-    alpha = 0.00069265;
-    Lopt = 43.325;
-    data{i}.muopt = mumax*(L/(L+(mumax/alpha)*((L/Lopt)-1)^2));
-    data{i}.omega = 0.010398;
-
+    % host growht data (mean from the figure2)
+    if gversion == 0
+        L = 35;
+        data{i}.L = L;
+        data{i}.kd = 322.68;
+        data{i}.K = 3E9;
+        mumax = 0.056965;
+        alpha = 0.00069265;
+        Lopt = 43.325;
+        data{i}.muopt = mumax*(L/(L+(mumax/alpha)*((L/Lopt)-1)^2));
+        data{i}.omega = 0.010398;
+    elseif gversion == 1
+        L = 35;
+        data{i}.L = L;
+        data{i}.kd = 151.59;
+        data{i}.K = 3E9;
+        mumax = 0.035;
+        alpha = 0.0011;
+        Lopt = 44.78;
+        data{i}.muopt = mumax*(L/(L+(mumax/alpha)*((L/Lopt)-1)^2));
+        data{i}.omega = 0.0032;
+    end
+    
+    
     % viral decay rate
     if s == 0 | s == 3
         data{i}.deltaL = 0.022/24;%in hours % Data from Qinglu PFU
