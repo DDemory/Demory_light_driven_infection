@@ -1,5 +1,5 @@
 % David Demory -- April 2019
-function [data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,nsimu,nRun)
+function [data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,gversion,nsimu,nRun)
 
 %% Parameter estimation with the MCMC metropolis algorithm
 % from the MCMC toolbox for the SEIV model
@@ -15,7 +15,7 @@ function [data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,nsimu,nRun
 
 %% Setup the strains
 nbrBatches = 5;
-[data,iniH,aveH,stdH,iniV,aveV,stdV,xl_a,xu_a] = setup_strain(s,Hypo,delayLysis,nbrBatches);
+[data,iniH,aveH,stdH,iniV,aveV,stdV,xl_a,xu_a] = setup_strain(s,Hypo,delayLysis,gversion,nbrBatches);
 para = [data{1}.L,data{1}.K,data{1}.kd,data{1}.muopt,data{1}.omega,data{1}.deltaL,data{1}.deltaD];
 directory_ini = './LHS_results/';
 
@@ -43,9 +43,9 @@ end
 
 local = sortrows(temp,2);
 % 10 first best results
-%MAT = local(1:10,:);
+MAT = local(1:10,:);
 % best result
-MAT = local(1,:);
+%MAT = local(1,:);
 
 if MAT == 1;
     

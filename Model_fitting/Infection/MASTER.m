@@ -14,15 +14,24 @@ s = 0;
 %	5 = H2_\phi\lambda
 %	6 = H2_\lambda\beta
 %	7 = H3
-Hypo = 0;
+Hypo = 5;
+
+% gversion
+gversion = 1;
 
 % delayLysis = initial model (0) or lysis inhibition model (1)
 delayLysis = 1;
 
 % nsimu = length of the mcmc chains
-nsimu = 1000;
+nsimu = 5000;
 
 % nRun = number of mcmc run
-nRun = 1;
+nRun = 3;
 
-[data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,nsimu,nRun);
+% nLHS
+nLHS = 1000;
+
+%[data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,gversion,nsimu,nRun);
+
+res = LHS_explore(s,Hypo,delayLysis,gversion,nLHS);
+[data,resmcmc] = main_SEIV_parasearch_MCMC(s,Hypo,delayLysis,gversion,nsimu,nRun);
